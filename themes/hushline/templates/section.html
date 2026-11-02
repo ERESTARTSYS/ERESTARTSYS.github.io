@@ -1,0 +1,1 @@
+{% extends "base.html" %}{% block title %}{{ section.title }} · {{ config.title }}{% endblock %}{% block content %}<a class="back" href="{{ get_url(path='@/_index.md') }}">← Home</a><h1>{{ section.title }}</h1><article class="prose">{{ section.content | safe }}</article>{% endblock %}

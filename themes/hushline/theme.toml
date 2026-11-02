@@ -1,0 +1,6 @@
+name = "Hushline"
+description = "A minimal, text-first dark theme for Zola with rich Markdown support."
+license = "MIT"
+min_version = "0.20.0"
+
+[extra]

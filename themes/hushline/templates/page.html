@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ page.title }} · {{ config.title }}{% endblock %}
+{% block content %}
+{% set archive = get_section(path="blog/_index.md") %}
+{% set_global archive_page = 1 %}
+{% set_global archive_count = 0 %}
+{% set_global return_page = 1 %}
+{% for entry in archive.pages %}
+  {% if archive_count == 10 %}{% set_global archive_page = archive_page + 1 %}{% set_global archive_count = 0 %}{% endif %}
+  {% if entry.permalink == page.permalink %}{% set_global return_page = archive_page %}{% endif %}
+  {% set_global archive_count = archive_count + 1 %}
+{% endfor %}
+{% if return_page == 1 %}<a class="back" href="{{ get_url(path='@/_index.md') }}">← Articles</a>{% else %}<a class="back" href="{{ config.base_url }}/page/{{ return_page }}/">← Articles · page {{ return_page }}</a>{% endif %}
+<header class="article-head"><h1>{{ page.title }}</h1><p>{{ page.date | date(format="%B %d, %Y") }}{% if page.reading_time %} · {{ page.reading_time }} min read{% endif %}</p></header>
+<details class="toc"><summary>On this page</summary><ul id="toc-list"></ul></details>
+<article class="prose">{{ page.content | safe }}</article>
+{% if page.taxonomies.tags %}<p class="tags">{% for tag in page.taxonomies.tags %}<a href="{{ get_taxonomy_url(kind='tags', name=tag) }}">{{ tag }}</a>{% endfor %}</p>{% endif %}
+{% if page.lower or page.higher %}<nav class="post-nav" aria-label="Adjacent articles"><div>{% if page.lower %}<a href="{{ page.lower.permalink }}"><span>← Previous</span><strong>{{ page.lower.title }}</strong></a>{% endif %}</div><div>{% if page.higher %}<a href="{{ page.higher.permalink }}"><span>Next →</span><strong>{{ page.higher.title }}</strong></a>{% endif %}</div></nav>{% endif %}
+{% endblock %}

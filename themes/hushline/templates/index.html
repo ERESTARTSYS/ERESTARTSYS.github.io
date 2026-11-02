@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ config.title }}{% endblock %}
+{% block content %}
+<header class="intro"><h1>{{ config.title }}</h1><p>{{ config.description }}</p></header>
+<ul class="posts">{% for page in paginator.pages %}<li class="post"><a href="{{ page.permalink }}">{{ page.title }}</a><time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time></li>{% endfor %}</ul>
+{% if paginator.number_pagers > 1 %}
+<nav class="pagination" aria-label="Pages">
+{% if paginator.previous %}<a class="page-action" href="{{ get_url(path='@/_index.md') }}" aria-label="First page">« First</a><a class="page-action" href="{{ paginator.previous }}" aria-label="Previous page">‹ Previous</a>{% else %}<span class="page-action disabled" aria-disabled="true">« First</span><span class="page-action disabled" aria-disabled="true">‹ Previous</span>{% endif %}
+<span class="page-numbers">{% for n in range(end=paginator.number_pagers) %}{% set num = n + 1 %}{% if num == paginator.current_index %}<span class="current" aria-current="page">{{ num }}</span>{% elif num == 1 %}<a href="{{ get_url(path='@/_index.md') }}" aria-label="Page 1">1</a>{% else %}<a href="{{ config.base_url }}/page/{{ num }}/" aria-label="Page {{ num }}">{{ num }}</a>{% endif %}{% endfor %}</span>
+<span class="page-count">({{ paginator.current_index }}/{{ paginator.number_pagers }})</span>
+{% if paginator.next %}<a class="page-action" href="{{ paginator.next }}" aria-label="Next page">Next ›</a><a class="page-action" href="{{ config.base_url }}/page/{{ paginator.number_pagers }}/" aria-label="Last page">Last »</a>{% else %}<span class="page-action disabled" aria-disabled="true">Next ›</span><span class="page-action disabled" aria-disabled="true">Last »</span>{% endif %}
+</nav>{% endif %}
+{% endblock %}

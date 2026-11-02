@@ -1,0 +1,22 @@
+base_url = "https://example.com/"
+title = "Hushline"
+description = "A quiet place for ideas."
+theme = "hushline"
+compile_sass = false
+build_search_index = false
+skip_content_templating = ["**/issue-*.md", "about/_index.md"]
+generate_feeds = true
+default_language = "en"
+taxonomies = [{ name = "tags", feed = true }]
+[markdown]
+render_emoji = true
+smart_punctuation = true
+bottom_footnotes = true
+github_alerts = true
+definition_list = true
+[markdown.highlighting]
+style = "inline"
+theme = "github-dark"
+
+[extra]
+author = "Hushline"

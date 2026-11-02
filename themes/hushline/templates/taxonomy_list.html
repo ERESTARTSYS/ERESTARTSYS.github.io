@@ -1,0 +1,1 @@
+{% extends "base.html" %}{% block title %}Tags · {{ config.title }}{% endblock %}{% block content %}<a class="back" href="{{ get_url(path='@/_index.md') }}">← Home</a><h1>Tags</h1><ul class="tag-list">{% for term in terms %}<li><a href="{{ term.permalink }}">{{ term.name }}</a><span>{{ term.pages | length }}</span></li>{% endfor %}</ul>{% endblock %}
