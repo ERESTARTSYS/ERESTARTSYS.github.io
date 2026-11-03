@@ -11,6 +11,6 @@ for(const ref of document.querySelectorAll('.footnote-reference a[href^="#"]')){
   const target=document.getElementById(decodeURIComponent(ref.getAttribute('href').slice(1)));
   if(!target||target.querySelector('.footnote-backref'))continue;
   const id='footnote-ref-'+target.id;ref.parentElement.id=id;
-  const back=document.createElement('a');back.className='footnote-backref';back.href='#'+id;back.textContent='↩';back.setAttribute('aria-label','Back to footnote reference');
+  const back=document.createElement('a');back.className='footnote-backref';back.href='#'+id;back.textContent='↩︎';back.setAttribute('aria-label','Back to footnote reference');
   (target.querySelector('p')||target).append(back);
 }
